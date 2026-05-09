@@ -414,11 +414,39 @@
   }
 
   /* ================================================================
+     GALLERY BUILDER — populate from SITE_CONFIG
+     ================================================================ */
+
+  function buildGallery() {
+    if (typeof SITE_CONFIG === "undefined") return;
+    var grid = document.getElementById("gallery-grid");
+    if (!grid) return;
+    var cfg = SITE_CONFIG.gallery;
+    if (!cfg || !cfg.images || !cfg.images.length) return;
+
+    var basePath = (cfg.basePath || "assets/images/");
+    var total = cfg.images.length;
+
+    grid.innerHTML = "";
+    cfg.images.forEach(function (filename, i) {
+      var div = document.createElement("div");
+      div.className = "gallery-item";
+      var img = document.createElement("img");
+      img.src = basePath + filename;
+      img.alt = "Ceramic piece by Adi, " + (i + 1) + " of " + total;
+      img.loading = "lazy";
+      div.appendChild(img);
+      grid.appendChild(div);
+    });
+  }
+
+  /* ================================================================
      INIT — run on DOMContentLoaded
      ================================================================ */
 
   function init() {
     applyBranding();
+    buildGallery();
     initMobileMenu();
     initScrollHeader();
     initActiveNavHighlight();
