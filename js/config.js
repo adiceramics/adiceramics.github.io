@@ -80,7 +80,7 @@ var SITE_CONFIG = {
       "IMG_9308.jpg",
       "IMG_9932.jpg"
     ],
-    basePath: "assets/images/"
+    basePath: "assests/images/"
   },
 
   about: {
